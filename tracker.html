@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Activity Tracker</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Custom styles */
+    /* Dark mode styling */
+    .dark-mode {
+      background-color: #1a202c;
+      color: #f7fafc;
+    }
+
+    .dark-mode input,
+    .dark-mode select,
+    .dark-mode textarea {
+      background-color: #2d3748;
+      color: #f7fafc;
+      border-color: #4a5568;
+    }
+
+    .dark-mode .bg-white {
+      background-color: #2d3748;
+    }
+
+    .dark-mode .text-gray-500 {
+      color: #a0aec0;
+    }
+
+    /* Skeleton Loader */
+    .skeleton {
+      background-color: #e2e8f0;
+      border-radius: 4px;
+      width: 100%;
+      height: 20px;
+      margin-bottom: 10px;
+      animation: shimmer 1.5s infinite;
+      background: linear-gradient(90deg, #e2e8f0 25%, #f8fafc 50%, #e2e8f0 75%);
+      background-size: 200% 100%;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    .dark-mode .skeleton {
+      background-color: #2d3748;
+      background: linear-gradient(90deg, #2d3748 25%, #4a5568 50%, #2d3748 75%);
+    }
+
+    /* Invert calendar icon color */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+    }
+
+    input[type="date"]::-moz-calendar-picker-indicator {
+      filter: invert(1);
+    }
+
+    input[type="date"]::-ms-clear {
+      filter: invert(1);
+    }
+  </style>
+</head>
+
+<body class="p-6">
+  <div class="container mx-auto">
+
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold">Ultimate Fitness Companion</h1>
+      <!-- Navigation -->
+      <nav>
+        <ul class="flex space-x-4">
+          <li><a href="index.html" class="text-blue-500 hover:underline">Calorie Calculator</a></li>
+          <li><a href="tracker.html" class="text-blue-500 hover:underline">Activity Tracker</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Theme Switch -->
+    <div class="flex items-center mb-6">
+      <input id="themeSwitch" type="checkbox" class="mr-2">
+      <label for="themeSwitch">Dark Mode</label>
+    </div>
+
+    <h2 class="text-2xl font-bold mb-4">Daily Activity Tracker</h2>
+
+    <!-- Activity Form -->
+    <form id="activityForm" class="mb-6">
+      <div class="mb-4">
+        <label for="date" class="block text-sm font-medium mb-1">Date:</label>
+        <input type="date" id="date" required class="w-full p-2 border border-gray-300 rounded">
+      </div>
+      <div class="mb-4">
+        <label for="calories" class="block text-sm font-medium mb-1">Calories Consumed:</label>
+        <input type="number" id="calories" required class="w-full p-2 border border-gray-300 rounded">
+      </div>
+      <button id="addEntryButton" type="button"
+        class="w-full md:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+        Add Entry
+      </button>
+    </form>
+
+    <!-- Activity Entries Table -->
+    <div id="activityEntries" class="mb-6">
+      <!-- Activity entries will be populated here -->
+    </div>
+
+    <!-- Loading Indicator with Skeleton -->
+    <div id="loadingTracker" class="mt-6 hidden">
+      <div class="skeleton h-6 w-1/2 mb-4"></div>
+      <div class="skeleton h-4 w-full mb-2"></div>
+      <div class="skeleton h-4 w-3/4 mb-2"></div>
+      <div class="skeleton h-4 w-5/6 mb-2"></div>
+    </div>
+
+    <!-- Chart Container -->
+    <canvas id="activityChart" width="400" height="200"></canvas>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+
+</html>
